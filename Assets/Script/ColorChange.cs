@@ -12,7 +12,7 @@ public class ColorChange : MonoBehaviour
 
     void Start()
     {
-        kumaSprite = gameObject.getComponent();
+        kumaSprite = gameObject.GetComponent<SpriteRenderer>();
         Debug.Log(kumaSprite.color);
     }
 
