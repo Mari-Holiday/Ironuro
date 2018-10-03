@@ -21,12 +21,16 @@ public class KumaScript : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
 
+        //画面内外の確認
         if (kuma.transform.position.x > -4 && kuma.transform.position.x < 4)
         {
-            timeElapsed = 0.0f; //再カウント
+            //画面内なら再カウント
+            timeElapsed = 0.0f; 
         }
         else
         {
+            //画面外ならカウント
+            //カウント8秒になったらオブジェクト削除
             if (timeElapsed > 8.0f)
             {
                 Debug.Log("くまDestroy");

@@ -19,7 +19,7 @@ public class KumaCreate : MonoBehaviour
         //左右に5体のくまを生成
         for (int i = 0; i < 2; i++)
         {
-            //1週目は右側に下方から作成
+            //1週目は右側に下方から作成（x軸少しずつずらし、ばらけるように）
             while (kumaPosition.y < 6)
             {
                 Instantiate(kuma, kumaPosition, Quaternion.identity);
@@ -42,9 +42,11 @@ public class KumaCreate : MonoBehaviour
             System.Random yRandom = new System.Random();
             float yPosition = (float)yRandom.Next(-5, 5);
 
+            //左右順番に生成
             if (leftRight) { kumaPosition = new Vector2(5.0f, yPosition); }
             else { kumaPosition = new Vector2(-5.0f, yPosition); }
 
+            //くま生成
             Debug.Log("newくまcreate" + yPosition);
             Instantiate(kuma, kumaPosition, Quaternion.identity);
 
