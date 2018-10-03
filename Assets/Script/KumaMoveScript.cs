@@ -5,10 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class KumaMoveScript : MonoBehaviour
 {
-    Vector2 force = new Vector2(0.0f, 1.0f);
+    Vector2 force = new Vector2(0.0f, 2.0f);
     Rigidbody2D rb;
     Vector2 prevPos;
-
 
 
     void Start()

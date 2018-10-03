@@ -6,33 +6,32 @@ using System;
 
 public class KumaScript : MonoBehaviour
 {
-    //アタッチのGameObjectから取得
-    SpriteRenderer kumaSprite;
-
-    //public TapGesture tapGesture;
-
-    //変更対象のSpriteを保持するGameObject(取得予定)
-    public SpriteRenderer changeSprite;
+    GameObject kuma;
+    
+    //5秒カウント用
+    float timeElapsed;
 
 
     void Start()
     {
-        kumaSprite = gameObject.GetComponent<SpriteRenderer>();
-        //Debug.Log(kumaSprite.color);
+        kuma = gameObject;
     }
 
     void Update()
     {
-        //実機用
-        if(Input.touchCount > 0){
-            Debug.Log("inputtouchsareta");
+        timeElapsed += Time.deltaTime;
+
+        if (kuma.transform.position.x > -4 && kuma.transform.position.x < 4)
+        {
+            timeElapsed = 0.0f; //再カウント
         }
-
-        //検証用
-        if(Input.GetMouseButtonDown(0)){
-
-            
-            //changeSprite.color = kumaSprite.color;
+        else
+        {
+            if (timeElapsed > 8.0f)
+            {
+                Debug.Log("くまDestroy");
+                Destroy(kuma);
+            }
         }
     }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7614396496921748237}
   - component: {fileID: 67623226652258052}
   - component: {fileID: 67623226652258053}
+  - component: {fileID: 4853696495878102452}
   - component: {fileID: 67623226652258051}
   m_Layer: 0
   m_Name: kuma
@@ -119,6 +120,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.01, y: 3.98}
   m_Direction: 0
+--- !u!114 &4853696495878102452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67623226652258050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42811a268ed947569978882790f30f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &67623226652258051
 MonoBehaviour:
   m_ObjectHideFlags: 0
