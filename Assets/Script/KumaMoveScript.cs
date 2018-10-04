@@ -10,6 +10,7 @@ public class KumaMoveScript : MonoBehaviour
 
     //進行方向を保持
     Vector2 prevPos;
+    private bool kumaDirection = true;
 
 
     void Start()
@@ -20,15 +21,21 @@ public class KumaMoveScript : MonoBehaviour
     void Update()
     {
         //絵柄の回転を阻止
-        gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        //左向き
+        if (kumaDirection) { gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f); }
+        //右向き
+        else { gameObject.transform.rotation = new Quaternion(0.0f, 180.0f, 0.0f, 0.0f); }
+    }
+
+    public bool getKumaDirection()
+    {
+        return kumaDirection;
     }
 
     void FixedUpdate()
     {
         //力を与え続ける
         rb.AddForce(force);
-
-
 
         //現在のPosisionの上書き
         prevPos = gameObject.transform.position;
@@ -42,5 +49,14 @@ public class KumaMoveScript : MonoBehaviour
         float y = this.transform.position.y - prevPos.y;
 
         force = new Vector2(x, y).normalized;
+
+        if (y < 0)
+        {
+            kumaDirection = false;
+        }
+        else
+        {
+            kumaDirection = true;
+        }
     }
 }

@@ -18,7 +18,7 @@ public class ColorClass : MonoBehaviour
     private static Color penYellow;
     private static Color penGreen;
 
-    void Start()
+    void Awake()
     {
         //ヒエラルキー上のサンプルくまから6色の取得、クラスフィールドに保持
         penWhite = kumaPenWhite.GetComponent<SpriteRenderer>().color;

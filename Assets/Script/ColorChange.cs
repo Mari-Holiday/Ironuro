@@ -10,7 +10,7 @@ public class ColorChange : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -20,7 +20,7 @@ public class ColorChange : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D[] hit2d = Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10);
 
-            if (hit2d[0])
+            if (hit2d.Length >= 0)
             {
                 for (int i = 0; i < hit2d.Length; i++)
                 {
@@ -28,9 +28,9 @@ public class ColorChange : MonoBehaviour
                     {
                         tapKuma = hit2d[i].transform.gameObject;
 
-                        Debug.Log("わたしはくまちゃん" + hit2d[i].transform.gameObject.name + i);
+                        Debug.Log("わたしはくまちゃん" + hit2d[i].transform.gameObject.name + hit2d[i].transform.gameObject.transform.position);
 
-                        //くま本体に当たったら、花部分がohanaに当たってるか確認するためメソ呼び出し                        
+                        //くま本体に当たったら、ペン先がohanaに当たってるか確認するためメソ呼び出し                        
                         changeOhanaColor();
                     }
                 }
@@ -40,7 +40,17 @@ public class ColorChange : MonoBehaviour
 
     void changeOhanaColor()
     {
-        Vector2 kumahana = new Vector2(tapKuma.transform.position.x + 1.4f, tapKuma.transform.position.y + 1.5f);
+        Vector2 kumahana;
+
+        //ペン先からRayを飛ばすため、くま自体のPositionから計算してペン先のPosisionを取得
+        if (tapKuma.GetComponent<KumaMoveScript>().getKumaDirection())
+        { //右向き
+            kumahana = new Vector2(tapKuma.transform.position.x + 0.8f, tapKuma.transform.position.y + 0.4f);
+        }
+        else
+        { //左向き
+            kumahana = new Vector2(tapKuma.transform.position.x + -0.8f, tapKuma.transform.position.y + 0.4f);
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         ray.origin = kumahana;
@@ -55,8 +65,11 @@ public class ColorChange : MonoBehaviour
                 tapOhana = hit2d[j].transform.gameObject;
 
                 Debug.Log("kumahanaからのRayがohanaに当たった");
-                tapOhana.GetComponent<SpriteRenderer>().color
-                    = tapKuma.GetComponent<SpriteRenderer>().color;
+
+                //クマペンの色を取得、お花に適応
+                GameObject kumaPen = tapKuma.transform.FindChild("kumapen").gameObject;
+                SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
+                tapOhana.GetComponent<SpriteRenderer>().color = kumaPenSprite.color;
             }
         }
     }
