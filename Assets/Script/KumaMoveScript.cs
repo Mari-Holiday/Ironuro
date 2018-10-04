@@ -50,7 +50,7 @@ public class KumaMoveScript : MonoBehaviour
 
         force = new Vector2(x, y).normalized;
 
-        if (y < 0)
+        if (x < 0)
         {
             kumaDirection = false;
         }
