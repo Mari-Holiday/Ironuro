@@ -19,7 +19,8 @@ public class KumaMoveScript : MonoBehaviour
 
     void Update()
     {
-
+        //絵柄の回転を阻止
+        gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
     void FixedUpdate()
@@ -27,8 +28,7 @@ public class KumaMoveScript : MonoBehaviour
         //力を与え続ける
         rb.AddForce(force);
 
-        //絵柄の回転を阻止
-        gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+
 
         //現在のPosisionの上書き
         prevPos = gameObject.transform.position;

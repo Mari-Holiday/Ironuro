@@ -7,6 +7,9 @@ using System;
 public class KumaScript : MonoBehaviour
 {
     GameObject kuma;
+
+    GameObject kumaPen;
+    SpriteRenderer kumaPenSprite;
     
     //5秒カウント用
     float timeElapsed;
@@ -15,6 +18,12 @@ public class KumaScript : MonoBehaviour
     void Start()
     {
         kuma = gameObject;
+
+        //くまの子要素となるクマペンを取得
+        kumaPen = kuma.transform.FindChild("kumapen").gameObject;
+        kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
+
+        //kumaPenSprite.color = ColorClass.chosePenColor(3);
     }
 
     void Update()
