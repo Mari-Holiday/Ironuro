@@ -11,6 +11,9 @@ public class GameTimeControl : MonoBehaviour
     public GameObject hazimaruyoImage;
     public Text gameTimeText;
     public GameObject finishImage;
+    public GameObject otsukareImage;
+
+    public float gamePlayTime;
 
     bool gameStart = false;
 
@@ -34,8 +37,9 @@ public class GameTimeControl : MonoBehaviour
             introduceTimeText.text = countdownStart.ToString();
         }
 
-        if (timeElapsed > 11.0f && timeElapsed < 111.0f) //10秒すぎたらゲーム・くま作成開始
+        if (timeElapsed > 11.0f && timeElapsed < (gamePlayTime + 11.0f)) //10秒すぎたらゲーム・くま作成開始
         {
+
             if (!gameStart)
             {
                 kumaIntroduce.SetActive(false);
@@ -44,16 +48,22 @@ public class GameTimeControl : MonoBehaviour
                 KumaScript.gameStart = true;
             }
 
-            int countdownStart = (int)(111.0 - timeElapsed);
+            int countdownStart = (int)((gamePlayTime + 11.0f) - timeElapsed);
             gameTimeText.text = countdownStart.ToString();
         }
 
-        if(timeElapsed > 111.0f) //ゲームスタート後100秒すぎたらゲーム終了
+        if (timeElapsed > (gamePlayTime + 11.0f)) //ゲーム終了
         {
-            finishImage.transform.DOMove(new Vector2(0.0f,0.0f),2f);
+            finishImage.transform.DOMove(new Vector2(0.0f, 0.0f), 2f);
         }
 
-        if (timeElapsed > 115.0f) //ゲームスタート後100秒すぎたらゲーム終了
+        if (timeElapsed > (gamePlayTime + 11.0f) + 2)//おつかれくまを登場させる
+        {
+            otsukareImage.transform.DOMove(new Vector2(-0.7f, -0.7f), 2f);
+            //☆のちほど、イージング追加予定
+        }
+
+        if (timeElapsed > (gamePlayTime + 11.0f) + 10) //終了
         {
             if (gameStart)
             {

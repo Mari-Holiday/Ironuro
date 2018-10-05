@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/IronuroTop.unity
+    guid: 39cd16c22018c4037b44993f0edc282c
+  - enabled: 1
+    path: Assets/Scenes/IronuroGame.unity
+    guid: d12b78b78a7c449868419fbbb20eb463
   m_configObjects: {}
