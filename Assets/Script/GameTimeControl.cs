@@ -19,6 +19,7 @@ public class GameTimeControl : MonoBehaviour
 
     public GameObject kumaCreate;
     public GameObject kumaIntroduce;
+    public GameObject kumaFinish;
 
     void Start()
     {
@@ -70,6 +71,8 @@ public class GameTimeControl : MonoBehaviour
                 kumaCreate.SetActive(false);
                 gameStart = false;
                 KumaScript.gameStart = false;
+
+                kumaFinish.SetActive(true);
             }
         }
     }
