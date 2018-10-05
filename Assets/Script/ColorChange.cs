@@ -67,7 +67,7 @@ public class ColorChange : MonoBehaviour
                 Debug.Log("kumahanaからのRayがohanaに当たった");
 
                 //クマペンの色を取得、お花に適応
-                GameObject kumaPen = tapKuma.transform.FindChild("kumapen").gameObject;
+                GameObject kumaPen = tapKuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
                 tapOhana.GetComponent<SpriteRenderer>().color = kumaPenSprite.color;
             }

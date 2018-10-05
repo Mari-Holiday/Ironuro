@@ -28,7 +28,7 @@ public class KumaCreate : MonoBehaviour
             {
                 GameObject kuma = Instantiate(kumaPrefab, kumaPosition, Quaternion.identity);
 
-                GameObject kumaPen = kuma.transform.FindChild("kumapen").gameObject;
+                GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
 
                 kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
@@ -73,7 +73,7 @@ public class KumaCreate : MonoBehaviour
             GameObject kuma = Instantiate(kumaPrefab, kumaPosition, Quaternion.identity);
 
             //くま色設定
-            GameObject kumaPen = kuma.transform.FindChild("kumapen").gameObject;
+            GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
             SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
             kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
 
