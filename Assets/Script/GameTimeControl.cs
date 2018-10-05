@@ -64,7 +64,7 @@ public class GameTimeControl : MonoBehaviour
             //☆のちほど、イージング追加予定
         }
 
-        if (timeElapsed > (gamePlayTime + 11.0f) + 10) //終了
+        if (timeElapsed > (gamePlayTime + 11.0f) + 6) //終了
         {
             if (gameStart)
             {

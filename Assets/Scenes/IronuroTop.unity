@@ -378,6 +378,8 @@ GameObject:
   - component: {fileID: 468238374}
   - component: {fileID: 468238376}
   - component: {fileID: 468238373}
+  - component: {fileID: 468238377}
+  - component: {fileID: 468238378}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -504,6 +506,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: IronuroGame
+--- !u!114 &468238377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468238371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf56893e8e248d4926a61292d8a586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 0
+--- !u!225 &468238378
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468238371}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &807712774
 GameObject:
   m_ObjectHideFlags: 0
