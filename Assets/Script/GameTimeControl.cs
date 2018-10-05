@@ -11,7 +11,9 @@ public class GameTimeControl : MonoBehaviour
     public GameObject hazimaruyoImage;
     public Text gameTimeText;
     public GameObject finishImage;
+    bool finishImageDo = false;
     public GameObject otsukareImage;
+    bool otsukareImageDo = false;
 
     public float gamePlayTime;
 
@@ -53,15 +55,23 @@ public class GameTimeControl : MonoBehaviour
             gameTimeText.text = countdownStart.ToString();
         }
 
+
         if (timeElapsed > (gamePlayTime + 11.0f)) //ゲーム終了
         {
-            finishImage.transform.DOMove(new Vector2(0.0f, 0.0f), 2f);
+            if (!finishImageDo)
+            {
+                finishImage.transform.DOMove(new Vector2(0.0f, 0.0f), 2f);
+                finishImageDo = true;
+            }
         }
 
         if (timeElapsed > (gamePlayTime + 11.0f) + 2)//おつかれくまを登場させる
         {
-            otsukareImage.transform.DOMove(new Vector2(-0.7f, -0.7f), 2f);
-            //☆のちほど、イージング追加予定
+            if (!otsukareImageDo)
+            {
+                otsukareImage.transform.DOMove(new Vector2(-0.7f, -0.7f), 2f).SetEase(Ease.OutBounce);
+                otsukareImageDo = true;
+            }
         }
 
         if (timeElapsed > (gamePlayTime + 11.0f) + 6) //終了
