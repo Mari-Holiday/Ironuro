@@ -14,6 +14,8 @@ public class KumaCreate : MonoBehaviour
     //色順番&ランダムに排出用
     static int colorNumCount;
 
+    GameObject[] kumaObjects;
+
 
     void Start()
     {
@@ -52,37 +54,60 @@ public class KumaCreate : MonoBehaviour
 
         if (timeElapsed >= 5.0f)
         {
-            //現れる場所をランダムに（毎回違うゲームになるように）
-            System.Random yRandom = new System.Random();
-            float yPosition = (float)yRandom.Next(-5, 5);
+            if (kumaCheck()) //30匹以上いる場合は生成しない
+            { 
 
-            int choseColorNum = colorNumCount;
-            //ランダム時（6,7の場合）の色決定
-            if (colorNumCount >= 6)
-            {
-                choseColorNum = yRandom.Next(0, 5);
-                Debug.Log("ランダム値→" + choseColorNum);
+                //現れる場所をランダムに（毎回違うゲームになるように）
+                System.Random yRandom = new System.Random();
+                float yPosition = (float)yRandom.Next(-5, 5);
+
+                int choseColorNum = colorNumCount;
+                //ランダム時（6,7の場合）の色決定
+                if (colorNumCount >= 6)
+                {
+                    choseColorNum = yRandom.Next(0, 5);
+                    Debug.Log("ランダム値→" + choseColorNum);
+                }
+
+                //左右順番に生成
+                if (leftRight) { kumaPosition = new Vector2(5.0f, yPosition); }
+                else { kumaPosition = new Vector2(-5.0f, yPosition); }
+
+                //くま生成
+                Debug.Log("newくまcreate" + yPosition);
+                GameObject kuma = Instantiate(kumaPrefab, kumaPosition, Quaternion.identity);
+
+                //くま色設定
+                GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
+                SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
+                kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
+
+                //0〜5までは各色を、6,7はランダム色、をループ
+                colorNumCount++;
+                if (colorNumCount >= 8) { colorNumCount = 0; }
+
+                leftRight = !leftRight; //左右変更
+
             }
 
-            //左右順番に生成
-            if (leftRight) { kumaPosition = new Vector2(5.0f, yPosition); }
-            else { kumaPosition = new Vector2(-5.0f, yPosition); }
-
-            //くま生成
-            Debug.Log("newくまcreate" + yPosition);
-            GameObject kuma = Instantiate(kumaPrefab, kumaPosition, Quaternion.identity);
-
-            //くま色設定
-            GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
-            SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
-            kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
-
-            //0〜5までは各色を、6,7はランダム色、をループ
-            colorNumCount++;
-            if (colorNumCount >= 8) { colorNumCount = 0; }
-
             timeElapsed = 0.0f; //再カウント
-            leftRight = !leftRight; //左右変更
+
         }
     }
+
+    bool kumaCheck()
+    {
+        kumaObjects = GameObject.FindGameObjectsWithTag("kuma");
+        Debug.Log("くまの量" + kumaObjects.Length);
+        if (kumaObjects.Length >= 30)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
 }
