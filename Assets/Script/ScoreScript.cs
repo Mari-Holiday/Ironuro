@@ -49,5 +49,10 @@ public class ScoreScript : MonoBehaviour
         collectAnswerRate = ((float)collectsNum / (float)questionsNum) * 100;
         collectAnswerRateText.text = Mathf.Round(collectAnswerRate).ToString();
         AnswerScript.collectAnswerRate = collectAnswerRateText.text;
+
+        if (collectsNum == questionsNum)
+        {
+            GameTimeControl.fullGame = true;
+        }
     }
 }

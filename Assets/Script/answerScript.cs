@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class AnswerScript : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class AnswerScript : MonoBehaviour
 
     public static string collectAnswerRate;
     public Text collectAnswerRateText;
+
+    public CanvasGroup subarashiCanvasGroup;
 
     void Start()
     {
@@ -23,6 +26,11 @@ public class AnswerScript : MonoBehaviour
         playedClone.transform.localScale = new Vector2(1.0f, 1.0f);
 
         collectAnswerRateText.text = collectAnswerRate;
+
+        if (collectAnswerRate == "100")
+        {
+            subarashiCanvasGroup.DOFade(0.9f, 2f);
+        }
     }
 
     void Update()
