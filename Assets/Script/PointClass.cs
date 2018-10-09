@@ -6,7 +6,6 @@ public class PointClass : MonoBehaviour
 {
     //塗られる対象（ohanaの花びらとか）の情報を格納するクラス
     //ゲームが始まる時にScoreScriptから格納され、コントロールされる
-    //なので情報の保持が第一業務
 
     //ゲーム色ぬり上の色の入るオブジェクトにアタッチする
 

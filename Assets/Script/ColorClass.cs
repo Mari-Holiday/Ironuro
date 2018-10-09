@@ -18,7 +18,7 @@ public class ColorClass : MonoBehaviour
     private static Color penYellow;
     private static Color penGreen;
 
-    //★クラスフィールドにインスペクター上から代入する方法を知りたーーい
+    //★クラスフィールドにインスペクター上から代入する方法を調査
     [SerializeField]
     public static Color white;
     [SerializeField]

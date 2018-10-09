@@ -47,7 +47,7 @@ public class ScoreScript : MonoBehaviour
         collectsNum = nowCollectsNum;
 
         collectAnswerRate = ((float)collectsNum / (float)questionsNum) * 100;
-        collectAnswerRateText.text = Mathf.Round(collectAnswerRate).ToString();
+        collectAnswerRateText.text = Mathf.Floor(collectAnswerRate).ToString();
         AnswerScript.collectAnswerRate = collectAnswerRateText.text;
 
         if (collectsNum == questionsNum)
