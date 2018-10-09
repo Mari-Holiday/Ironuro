@@ -18,15 +18,38 @@ public class ColorClass : MonoBehaviour
     private static Color penYellow;
     private static Color penGreen;
 
+    //★クラスフィールドにインスペクター上から代入する方法を知りたーーい
+    [SerializeField]
+    public static Color white;
+    [SerializeField]
+    private Color black;
+    [SerializeField]
+    private Color red;
+    [SerializeField]
+    private Color blue;
+    [SerializeField]
+    private Color yellow;
+    [SerializeField]
+    private Color green;
+
+
     void Awake()
     {
-        //ヒエラルキー上のサンプルくまから6色の取得、クラスフィールドに保持
+        //★インスペクター上からクラスフィールドに保持したい
+        // penWhite = white;
+        // penBlack = black;
+        // penRed = red;
+        // penBlue = blue;
+        // penYellow = yellow;
+        // penGreen = green;
+
         penWhite = kumaPenWhite.GetComponent<SpriteRenderer>().color;
         penBlack = kumaPenBlack.GetComponent<SpriteRenderer>().color;
         penRed = kumaPenRed.GetComponent<SpriteRenderer>().color;
         penBlue = kumaPenBlue.GetComponent<SpriteRenderer>().color;
         penYellow = kumaPenYellow.GetComponent<SpriteRenderer>().color;
         penGreen = kumaPenGreen.GetComponent<SpriteRenderer>().color;
+
     }
 
     void Update()
@@ -51,7 +74,6 @@ public class ColorClass : MonoBehaviour
     {
         return penWhite;
     }
-
     public static Color getPenBlack()
     {
         return penBlack;

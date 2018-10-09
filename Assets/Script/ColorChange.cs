@@ -70,6 +70,9 @@ public class ColorChange : MonoBehaviour
                 GameObject kumaPen = tapKuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
                 tapOhana.GetComponent<SpriteRenderer>().color = kumaPenSprite.color;
+
+                //現在の色情報を色ぬりオブジェクトに保持
+                tapOhana.GetComponent<PointClass>().nowColor = kumaPenSprite.color;
             }
         }
     }

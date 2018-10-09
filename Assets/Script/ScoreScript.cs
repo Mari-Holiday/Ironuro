@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public class ScoreScript : MonoBehaviour
 {
-    //下記4コレクションに色塗られる対象オブジェクトと、オブジェクトの現在の色を格納
-    //いや、それならカラーのクラス作って、それを1コレクションで管理しよう！！！！
+    //スコア（正誤率）管理用
 
-    private static List<GameObject> questionPoints = new List<GameObject>();
-    private static List<GameObject> answerPoints = new List<GameObject>();
+    //問題色ぬり数
+    public int questionsNum;
+    public static PointClass[] questionKindList;
 
-    public static List<kumaCOL> questions = new List<kumaCOL>();
-    public static List<kumaCOL> answers = new List<kumaCOL>();
+    //正解中の色ぬり数
+    private int collectsNum = 0;
+
+    //正答率
+    private float collectAnswerRate;
+    public Text collectAnswerRateText;
+
+    void Awake()
+    {
+        //問題番号と同じ番号に格納するため＋1（0が存在するため）
+        questionKindList = new PointClass[questionsNum + 1];
+    }
 
     void Start()
     {
@@ -22,6 +32,22 @@ public class ScoreScript : MonoBehaviour
 
     void Update()
     {
+        int nowCollectsNum = 0;
 
+        for (int i = 1; i < questionKindList.Length; i++) //正解中の問題をチェック
+        {
+            PointClass point = questionKindList[i];
+
+            if (point.getSameColor())
+            {
+                nowCollectsNum++;
+            }
+        }
+
+        collectsNum = nowCollectsNum;
+
+        collectAnswerRate = ((float)collectsNum / (float)questionsNum) * 100;
+        collectAnswerRateText.text = Mathf.Round(collectAnswerRate).ToString();
+        AnswerScript.collectAnswerRate = collectAnswerRateText.text;
     }
 }
