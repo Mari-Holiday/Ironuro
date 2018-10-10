@@ -8,9 +8,11 @@ public class ColorChange : MonoBehaviour
     GameObject tapKuma;
     GameObject tapOhana;
 
+    GameObject particlePrefab;
+
     void Start()
     {
-
+        particlePrefab = (GameObject)Resources.Load("Particle");
     }
 
     void Update()
@@ -70,7 +72,11 @@ public class ColorChange : MonoBehaviour
                 GameObject kumaPen = tapKuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
                 tapOhana.GetComponent<SpriteRenderer>().color = kumaPenSprite.color;
-                
+
+                //パーティクル生成
+                GameObject particle = Instantiate(particlePrefab, kumahana, Quaternion.identity);
+                particle.GetComponent<ParticleSystem>().Emit(1);
+
                 //現在の色情報を色ぬりオブジェクトに保持
                 tapOhana.GetComponent<PointClass>().nowColor = kumaPenSprite.color;
             }
