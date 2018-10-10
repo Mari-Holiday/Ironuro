@@ -7,3 +7,9 @@
     yerrow = 4,
     green = 5
 }
+
+public enum level{
+    lower = 1,
+    middle = 2,
+    upper = 3
+}

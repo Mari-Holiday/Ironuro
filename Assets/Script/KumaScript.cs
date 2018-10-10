@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TouchScript.Gestures;
+//using TouchScript.Gestures;
 using System;
 
 public class KumaScript : MonoBehaviour
