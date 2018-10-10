@@ -640,12 +640,12 @@ GameObject:
   m_Component:
   - component: {fileID: 271346342}
   m_Layer: 0
-  m_Name: ColorSampleKuma
+  m_Name: ColorSampleKuma(NOUSE)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &271346342
 Transform:
   m_ObjectHideFlags: 0
@@ -6059,6 +6059,7 @@ GameObject:
   - component: {fileID: 1537452195}
   - component: {fileID: 1537452196}
   - component: {fileID: 1537452194}
+  - component: {fileID: 1537452197}
   m_Layer: 0
   m_Name: ScriptObject
   m_TagString: Untagged
@@ -6108,7 +6109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537452193}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00c1166dafd284f25b60e55aaac6758c, type: 3}
   m_Name: 
@@ -6124,6 +6125,24 @@ MonoBehaviour:
   blue: {r: 0.3820755, g: 0.67491335, b: 1, a: 0}
   yellow: {r: 1, g: 0.846381, b: 0.2028302, a: 0}
   green: {r: 0.27865252, g: 1, b: 0.25943398, a: 0}
+--- !u!114 &1537452197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537452193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0916c41f61144eea9f309bcf21a82e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  white: {r: 1, g: 1, b: 1, a: 1}
+  black: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  red: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
+  blue: {r: 0.4575472, g: 0.7418976, b: 1, a: 1}
+  yellow: {r: 0.9716981, g: 0.8313602, b: 0.23375754, a: 1}
+  green: {r: 0.29882118, g: 1, b: 0.2971698, a: 1}
 --- !u!1 &1571592204
 GameObject:
   m_ObjectHideFlags: 0
@@ -8373,7 +8392,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098575796}
-  - component: {fileID: 2098575797}
   m_Layer: 0
   m_Name: PlayGameScreen
   m_TagString: Untagged
@@ -8404,24 +8422,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2098575797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098575795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0916c41f61144eea9f309bcf21a82e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  white: {r: 1, g: 1, b: 1, a: 1}
-  black: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
-  red: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
-  blue: {r: 0.2688679, g: 0.49571508, b: 1, a: 1}
-  yellow: {r: 0.9716981, g: 0.8313602, b: 0.23375754, a: 1}
-  green: {r: 0.29882118, g: 1, b: 0.2971698, a: 1}
 --- !u!1 &2115073584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7106892886287638344, guid: c2312278af48f414ca2e2bc27b3ecc77, type: 3}

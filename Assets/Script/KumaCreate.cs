@@ -33,7 +33,7 @@ public class KumaCreate : MonoBehaviour
                 GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
 
-                kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
+                kumaPenSprite.color = KumaColor.Instance.chosePenColor(choseColorNum);
                 choseColorNum++;
 
                 kumaPosition.x = kumaPosition.x - 0.2f;
@@ -80,7 +80,7 @@ public class KumaCreate : MonoBehaviour
                 //くま色設定
                 GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
-                kumaPenSprite.color = ColorClass.chosePenColor(choseColorNum);
+                kumaPenSprite.color = KumaColor.Instance.chosePenColor(choseColorNum);
 
                 //0〜5までは各色を、6,7はランダム色、をループ
                 colorNumCount++;

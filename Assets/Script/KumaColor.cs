@@ -25,6 +25,17 @@ public class KumaColor : SingletonMonoBehaviour<KumaColor>
 
     }
 
+    public Color chosePenColor(int colorNum)
+    {
+        if (colorNum == 0) { return white; }
+        if (colorNum == 1) { return black; }
+        if (colorNum == 2) { return red; }
+        if (colorNum == 3) { return blue; }
+        if (colorNum == 4) { return yellow; }
+        if (colorNum == 5) { return green; }
+        else { return white; }
+    }
+
     public Color getWhite(){
         return white;
     }
