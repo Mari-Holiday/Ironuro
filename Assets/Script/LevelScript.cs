@@ -14,8 +14,10 @@ public class LevelScript : MonoBehaviour
     public SpriteRenderer[] ohanas;
     public Button[] buttons = new Button[3];
 
-    void OnEnable()
+    void Start()
     {
+        Debug.Log("イベント登録するよ");
+
         for (int i = 0; i < buttons.Length; i++)
         {
             int n = i; //呼び出し時iのアドレスを参照してしまうため、ループ内で新変数nを宣言、当時のiの値を代入
@@ -27,14 +29,14 @@ public class LevelScript : MonoBehaviour
 
     }
 
-    // void OnDisable()
-    // {
-    //     for (int i = 0; i < buttons.Length; i++)
-    //     {
-    //         buttons[i].onClick.RemoveAllListeners();
-    //         Debug.Log(buttons[i].name + "けす");
-    //     }
-    // }
+    void OnDisable()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].onClick.RemoveAllListeners();
+            Debug.Log(buttons[i].name + "けす");
+        }
+    }
 
     public void checkLevel(level choiseLevel)
     {

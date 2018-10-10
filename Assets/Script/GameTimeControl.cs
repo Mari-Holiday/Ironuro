@@ -34,13 +34,18 @@ public class GameTimeControl : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("新ゲームはじまるよ");
+
         kumaLevel.SetActive(true);
         kumaIntroduce.SetActive(false);
         kumaCreate.SetActive(false);
         kumaFinish.SetActive(false);
 
         timeElapsed = 0.0f;
+
+        //シーン遷移後も初期化
         fullGame = false;
+        levelChoise = true;
     }
 
     void Update()
