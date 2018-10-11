@@ -148,14 +148,10 @@ public class KumaCreate : MonoBehaviour
     {
         kumaObjects = GameObject.FindGameObjectsWithTag("kuma");
         Debug.Log("くまの量 → " + kumaObjects.Length);
-        if (kumaObjects.Length >= 30)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+
+        //30匹以上は生成させないため、falseを返す
+        if (kumaObjects.Length >= 30) { return false; }
+        else { return true; }
     }
 
 
