@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 67623226652258052}
   - component: {fileID: 4853696495878102452}
   - component: {fileID: 67623226652258051}
-  - component: {fileID: 1663865268}
   - component: {fileID: 305772443589056459}
   m_Layer: 0
   m_Name: kuma
@@ -128,18 +127,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 406097046e5e74ac58b3bfc7f5ad9722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1663865268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67623226652258050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135bdb101e80045778d7d07bb908b5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!60 &305772443589056459

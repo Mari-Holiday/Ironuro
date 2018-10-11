@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D))] //Rigidbodyのアタッチを強制
 public class KumaMoveScript : MonoBehaviour
 {
+    /* くまオブジェクトにアタッチ、縦横無尽な動きと向き固定を制御 */
+
+    //動きの制御用
     Vector2 force = new Vector2(0.0f, 2.0f);
     Rigidbody2D rb;
 
@@ -20,16 +23,9 @@ public class KumaMoveScript : MonoBehaviour
 
     void Update()
     {
-        //絵柄の回転を阻止
-        //左向き
-        if (kumaDirection) { gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f); }
-        //右向き
-        else { gameObject.transform.rotation = new Quaternion(0.0f, 180.0f, 0.0f, 0.0f); }
-    }
-
-    public bool getKumaDirection()
-    {
-        return kumaDirection;
+        //くまの回転を阻止、動く方向によって左右の向きのみ変動
+        if (kumaDirection) { gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f); } //左向き
+        else { gameObject.transform.rotation = new Quaternion(0.0f, 180.0f, 0.0f, 0.0f); } //右向き
     }
 
     void FixedUpdate()
@@ -37,26 +33,25 @@ public class KumaMoveScript : MonoBehaviour
         //力を与え続ける
         rb.AddForce(force);
 
-        //現在のPosisionの上書き
+        //現在のPosisionを保持
         prevPos = gameObject.transform.position;
     }
 
-    //※冒頭でRigidbodyコンポーネントを読み込みしてるためイベント登録なしでOK？
-    //衝突したら力を与える方向を、跳ね返りの進行方向へ上書き
-    void OnCollisionExit2D(Collision2D c)
+    //別のColliderに衝突したら、力を与える方向を跳ね返りの進行方向に上書き
+    void OnCollisionExit2D(Collision2D c)　//衝突判定
     {
         float x = this.transform.position.x - prevPos.x;
         float y = this.transform.position.y - prevPos.y;
 
         force = new Vector2(x, y).normalized;
 
-        if (x < 0)
-        {
-            kumaDirection = false;
-        }
-        else
-        {
-            kumaDirection = true;
-        }
+        if (x < 0) { kumaDirection = false; } //x0が中央、そのため右向き
+        else { kumaDirection = true; }　//左向き
     }
+
+    public bool getKumaDirection()
+    {
+        return kumaDirection;
+    }
+
 }

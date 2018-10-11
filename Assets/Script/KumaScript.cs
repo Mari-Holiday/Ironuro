@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using TouchScript.Gestures;
 using System;
+//using TouchScript.Gestures; //今回はタッチスクリプト導入なし
 
 public class KumaScript : MonoBehaviour
 {
-    GameObject kuma;
 
+    /* くまオブジェクトにアタッチ、鉛筆などの保持
+    　　また、自爆を制御  */
+
+    GameObject kuma;
     GameObject kumaPen;
     SpriteRenderer kumaPenSprite;
 
-    //5秒カウント用
+    //自爆8秒カウント用
     float timeElapsed;
 
-    //ゲーム終了後削除用
+    //ゲーム終了後（結果画面前）制御用、全くま共通
     public static bool gameStart;
 
 
@@ -22,40 +25,35 @@ public class KumaScript : MonoBehaviour
     {
         kuma = gameObject;
 
-        //くまの子要素となるクマペンを取得
+        //くまの子要素となるクマペンを取得、保持
         kumaPen = kuma.transform.Find("kumapen").gameObject;
         kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
-
-        //kumaPenSprite.color = ColorClass.chosePenColor(3);
     }
 
     void Update()
     {
-        if (gameStart)
+        if (gameStart) //ゲーム中
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.deltaTime; //カウント開始
 
-            //画面内外の確認
+            //画面内or外の確認
             if (kuma.transform.position.x > -4 && kuma.transform.position.x < 4)
             {
-                //画面内なら再カウント
-                timeElapsed = 0.0f;
+                timeElapsed = 0.0f; //画面内ならカウントしない
             }
             else
             {
-                //画面外ならカウント
-                //カウント8秒になったらオブジェクト削除
-                if (timeElapsed > 8.0f)
+                if (timeElapsed > 8.0f)　//画面外ならカウント
                 {
+                    //カウント8秒になったらオブジェクト削除
                     Debug.Log("くまDestroy");
                     Destroy(kuma);
                 }
             }
 
         }
-        else //ゲーム終了後は削除
+        else //ゲーム終了後は全くま削除
         {
-            Debug.Log("ゲーム終了、全くまDestroy");
             Destroy(kuma);
         }
 

@@ -5,7 +5,9 @@ using DG.Tweening;
 
 public class LevelButtonScript : MonoBehaviour
 {
-    [SerializeField]
+    //レベル選択ボタンにアタッチ
+
+    [SerializeField] //対応するアニメーションくまオブジェクトをインスペクターから格納
     private GameObject levelKuma;
 
     void Start()

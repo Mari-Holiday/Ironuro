@@ -6,28 +6,29 @@ using System;
 
 public class LevelScript : MonoBehaviour
 {
+    //今回のゲームレベルを保持
     public static level choisedLevel;
 
-    //レベル1（単色）の色をインスペクター上から選択
-    public kumaCOL level1Color;
+    //レベル1（単色）の色保持
+    public static kumaCOL level1Color = kumaCOL.yerrow;
 
+    //問題となるohanaオブジェクト、レベル選択肢ボタンオブジェクトをインスペクターから格納
     public SpriteRenderer[] ohanas;
     public Button[] buttons = new Button[3];
 
     void Start()
     {
-        Debug.Log("イベント登録するよ");
-
+        //オンクリックイベントの登録
         for (int i = 0; i < buttons.Length; i++)
         {
-            int n = i; //呼び出し時iのアドレスを参照してしまうため、ループ内で新変数nを宣言、当時のiの値を代入
+            int n = i; //各メソッド呼び出し時iのアドレスを参照してしまうため、ループ内で新変数nを宣言、当時のiの値を代入
 
             buttons[i].onClick.RemoveAllListeners();
             buttons[i].onClick.AddListener(() =>
            checkLevel((level)Enum.ToObject(typeof(level), n + 1)));
         }
-
     }
+
 
     void OnDisable()
     {
@@ -41,9 +42,10 @@ public class LevelScript : MonoBehaviour
     {
         Debug.Log("level = " + choiseLevel);
 
-        if (choiseLevel == level.lower) //単色レベル
+        if (choiseLevel == level.lower) //単色レベルの場合
         {
-            KumaCreate.oneColorNum = (int)level1Color;
+            //単色をランダムで決定
+            level1Color = (kumaCOL)Enum.ToObject(typeof(kumaCOL), (UnityEngine.Random.Range(2, 5)));
 
             //ohanaを全同色に設定
             foreach (SpriteRenderer ohana in ohanas)

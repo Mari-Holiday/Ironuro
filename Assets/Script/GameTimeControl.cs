@@ -6,7 +6,13 @@ using DG.Tweening;
 
 public class GameTimeControl : MonoBehaviour
 {
+    /* IronuroGame内のレベル選択→おてほん確認→ゲーム→答え合わせ
+        の順番、時間などの制御 */
+
+    //レベル選択後、時間カウント開始、経過時間を格納
     float timeElapsed;
+
+    //画面上のカウントや時間経過によるアニメーション制御用
     public Text introduceTimeText;
     public GameObject hazimaruyoImage;
     public Text gameTimeText;
@@ -15,35 +21,36 @@ public class GameTimeControl : MonoBehaviour
     public GameObject otsukareImage;
     bool otsukareImageDo = false;
 
+    //ゲーム制限時間をインスペクターから格納
     public float gamePlayTime;
 
+    //ゲーム中true、状況の共有用
     bool gameStart = false;
 
+    //各スクリーンのオブジェクトをインスペクターから格納
     public GameObject kumaCreate;
     public GameObject kumaIntroduce;
     public GameObject kumaFinish;
     public GameObject kumaLevel;
 
-    //100点になった場合
+    //100点になった場合の制御用
     public static bool fullGame = false;
     float fullGameTime;
 
-    //レベル選択画面の制御
+    //レベル選択画面の制御用
     public static bool levelChoise = true;
 
 
     void Start()
     {
-        Debug.Log("新ゲームはじまるよ");
-
+        //レベル選択画面以外を非表示に
         kumaLevel.SetActive(true);
         kumaIntroduce.SetActive(false);
         kumaCreate.SetActive(false);
         kumaFinish.SetActive(false);
 
-        timeElapsed = 0.0f;
-
         //シーン遷移後も初期化
+        timeElapsed = 0.0f;
         fullGame = false;
         levelChoise = true;
     }
@@ -56,9 +63,9 @@ public class GameTimeControl : MonoBehaviour
         }
         else
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.deltaTime; //カウント開始
 
-            if (timeElapsed < 11.0f)
+            if (timeElapsed < 11.0f) //1〜10秒は見本表示導入画面の表示
             {
                 kumaLevel.SetActive(false);
                 kumaIntroduce.SetActive(true);
@@ -68,15 +75,13 @@ public class GameTimeControl : MonoBehaviour
             }
 
 
-            if (fullGame)
+            if (fullGame) //全色ぬりを完成させた場合（そのため1週目は通らない）
             {
                 if (gameStart)
                 {
                     fullGameTime = timeElapsed;
-                    Debug.Log(fullGameTime);
-                    Debug.Log(timeElapsed);
 
-                    if (!finishImageDo)
+                    if (!finishImageDo) //ゲーム終了処理
                     {
                         finishImage.transform.DOMove(new Vector2(0.0f, 0.0f), 2f);
                         finishImageDo = true;
@@ -85,17 +90,17 @@ public class GameTimeControl : MonoBehaviour
                     }
                 }
 
-                if (timeElapsed > fullGameTime + 4)
+                if (timeElapsed > fullGameTime + 4) //4秒間ゲーム終了画面の表示、その後結果画面へ遷移
                 {
                     kumaCreate.SetActive(false);
                     kumaFinish.SetActive(true);
                 }
 
             }
-            else //100点以下の場合
+            else //ゲームプレイ中、100点以下の場合
             {
 
-                if (timeElapsed > 11.0f && timeElapsed < (gamePlayTime + 11.0f)) //10秒すぎたらゲーム・くま作成開始
+                if (timeElapsed > 11.0f && timeElapsed < (gamePlayTime + 11.0f)) //11秒〜ゲーム・くま作成開始
                 {
 
                     if (!gameStart)
@@ -106,13 +111,13 @@ public class GameTimeControl : MonoBehaviour
                         KumaScript.gameStart = true;
                     }
 
-                    int countdownStart = (int)((gamePlayTime + 11.0f) - timeElapsed);
+                    int countdownStart = (int)((gamePlayTime + 11.0f) - timeElapsed); //残り秒数の画面表示
                     gameTimeText.text = countdownStart.ToString();
                 }
 
                 if (timeElapsed > (gamePlayTime + 11.0f)) //ゲーム終了
                 {
-                    if (!finishImageDo)
+                    if (!finishImageDo) //ゲーム終了処理
                     {
                         finishImage.transform.DOMove(new Vector2(0.0f, 0.0f), 2f);
                         finishImageDo = true;
@@ -120,7 +125,7 @@ public class GameTimeControl : MonoBehaviour
                     }
                 }
 
-                if (timeElapsed > (gamePlayTime + 11.0f) + 2)//おつかれくまを登場させる
+                if (timeElapsed > (gamePlayTime + 11.0f) + 2) //ゲーム終了画面から2秒後、おつかれくまを登場させる
                 {
                     if (!otsukareImageDo)
                     {
@@ -129,7 +134,7 @@ public class GameTimeControl : MonoBehaviour
                     }
                 }
 
-                if (timeElapsed > (gamePlayTime + 11.0f) + 6) //終了
+                if (timeElapsed > (gamePlayTime + 11.0f) + 6) //さらに4秒後、ゲーム結果画面へ遷移
                 {
                     if (gameStart)
                     {

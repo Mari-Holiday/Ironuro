@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
-    //スコア（正誤率）管理用
+    /* スコア（正誤率）管理用　*/
 
-    //問題色ぬり数
-    public int questionsNum;
+    //問題色ぬられるオブジェクト用
+    public int questionsNum; //インスペクターから格納
     public static PointClass[] questionKindList;
 
     //正解中の色ぬり数
@@ -17,7 +17,7 @@ public class ScoreScript : MonoBehaviour
 
     //正答率
     private float collectAnswerRate;
-    public Text collectAnswerRateText;
+    public Text collectAnswerRateText; //画面表示用Textをインスペクターから格納
 
     void Awake()
     {
@@ -32,8 +32,8 @@ public class ScoreScript : MonoBehaviour
 
     void Update()
     {
+        //現在の状況を確認
         int nowCollectsNum = 0;
-
         for (int i = 1; i < questionKindList.Length; i++) //正解中の問題をチェック
         {
             PointClass point = questionKindList[i];
@@ -44,6 +44,7 @@ public class ScoreScript : MonoBehaviour
             }
         }
 
+        //現在の状況をフィールドに保持
         collectsNum = nowCollectsNum;
 
         collectAnswerRate = ((float)collectsNum / (float)questionsNum) * 100;

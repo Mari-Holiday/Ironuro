@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class KumaColor : SingletonMonoBehaviour<KumaColor>
 {
+    /* ゲームで利用する色を管理
+        Singletonを継承し、インスペクターからStatic的に色を設定 */
+
     [SerializeField]
     private Color white;
     [SerializeField]
@@ -25,6 +28,7 @@ public class KumaColor : SingletonMonoBehaviour<KumaColor>
 
     }
 
+    //EnumのkumaCOLの番号で該当の色を返すメソッド
     public Color chosePenColor(int colorNum)
     {
         if (colorNum == 0) { return white; }
@@ -36,6 +40,7 @@ public class KumaColor : SingletonMonoBehaviour<KumaColor>
         else { return white; }
     }
 
+    //各色ゲットメソッド（現在は使用なし）
     public Color getWhite(){
         return white;
     }

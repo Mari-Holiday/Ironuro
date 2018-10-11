@@ -2,46 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ColorChange : MonoBehaviour
 {
+
+    /* 画面タップからのRayでくまの衝突判定、
+    　　そのくまの鉛筆の先からのRayでohanaの衝突判定 */
+
+    //各オブジェクト衝突判定用
     GameObject tapKuma;
     GameObject tapOhana;
 
+    //くまとohanaが衝突したPosition
     private Vector2 kumahana;
-    GameObject particlePrefab;
-    GameObject wrongParticlePrefab;
+
+    //各パーティクル
+    static GameObject particlePrefab;
+    static GameObject wrongParticlePrefab;
 
     void Start()
     {
+        //パーティクルプレファブ取得
         particlePrefab = (GameObject)Resources.Load("Particle");
         wrongParticlePrefab = (GameObject)Resources.Load("WrongParticle");
     }
 
     void Update()
     {
+        //タッチされたら判定
         if (Input.GetMouseButtonDown(0))
         {
+            //タッチ場所からRayを飛ばし、当たったオブジェクトを保持
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D[] hit2d = Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10);
 
+            //当たったオブジェクトをチェック
             if (hit2d.Length >= 0)
             {
                 for (int i = 0; i < hit2d.Length; i++)
                 {
-                    if (hit2d[i].transform.gameObject == gameObject)
+                    if (hit2d[i].transform.gameObject.tag == "kuma") //くまオブジェクトにRayが当たっていたら
                     {
                         tapKuma = hit2d[i].transform.gameObject;
 
-                        Debug.Log("わたしはくまちゃん" + hit2d[i].transform.gameObject.name + hit2d[i].transform.gameObject.transform.position);
-
-                        //くま本体に当たったら、ペン先がohanaに当たってるか確認するためメソ呼び出し                        
+                        //ペン先がohanaに当たってるか確認するメソッド呼び出し    
                         changeOhanaColor();
                     }
                 }
             }
         }
     }
+
 
     void changeOhanaColor()
     {
@@ -55,9 +65,9 @@ public class ColorChange : MonoBehaviour
             kumahana = new Vector2(tapKuma.transform.position.x + -0.8f, tapKuma.transform.position.y + 0.4f);
         }
 
+        //ペン先から新しいRayを作成、当たったオブジェクトを保持
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         ray.origin = kumahana;
-
         RaycastHit2D[] hit2d = Physics2D.RaycastAll((Vector2)ray.origin, (Vector2)ray.direction, 10);
 
         for (int j = 0; j < hit2d.Length; j++)
@@ -67,7 +77,7 @@ public class ColorChange : MonoBehaviour
             {
                 tapOhana = hit2d[j].transform.gameObject;
 
-                Debug.Log("kumahanaからのRayがohanaに当たった");
+                Debug.Log("kumahanaからのRayがohanaにヒット");
 
                 //クマペンの色を取得、お花に適応
                 GameObject kumaPen = tapKuma.transform.Find("kumapen").gameObject;
@@ -88,15 +98,10 @@ public class ColorChange : MonoBehaviour
                 particle.GetComponent<ParticleSystem>().Emit(1);
                 Destroy(particle, (float)particle.GetComponent<ParticleSystem>().main.duration);
 
-                //現在の色情報を色ぬりオブジェクトに保持
+                //現在の色情報を色ぬられるオブジェクトのポイントクラスに格納
                 tapOhana.GetComponent<PointClass>().nowColor = kumaPenSprite.color;
             }
         }
-    }
-
-    public Vector2 getKumahana()
-    {
-        return kumahana;
     }
 
 }

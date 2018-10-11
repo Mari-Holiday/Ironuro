@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class KumaCreate : MonoBehaviour
 {
+    /* ゲーム中のくま作成と制御 */
+
     GameObject kumaPrefab;
     Vector2 kumaPosition = new Vector2(6.0f, -5.0f);
 
@@ -15,8 +17,7 @@ public class KumaCreate : MonoBehaviour
     static int colorNumCount = 0;
     public static int startColorNumCount = 0; //0~白黒あり、2~白黒なし 
 
-    public static int oneColorNum = 0; //レベル1の際の単色
-
+    //現在登場中のくまカウント用
     GameObject[] kumaObjects;
 
 
@@ -25,13 +26,30 @@ public class KumaCreate : MonoBehaviour
         //ループ用初期値設定
         colorNumCount = startColorNumCount;
 
+        //くまプレファブの取得
         kumaPrefab = (GameObject)Resources.Load("kuma");
         int choseColorNum = startColorNumCount;
 
-        //左右に5体のくまを生成
+
+        //ゲームスタート時、中央くまを生成
+        GameObject kumaFirst = Instantiate(kumaPrefab, new Vector2(0.0f, 0.0f), Quaternion.identity);
+        GameObject kumaFirstPen = kumaFirst.transform.Find("kumapen").gameObject;
+        SpriteRenderer kumaFirstPenSprite = kumaFirstPen.GetComponentInChildren<SpriteRenderer>();
+
+        if (LevelScript.choisedLevel == level.lower) //単色の場合
+        {
+            kumaFirstPenSprite.color = KumaColor.Instance.chosePenColor((int)LevelScript.level1Color);
+        }
+        else //カラフルの場合
+        {
+            kumaFirstPenSprite.color = KumaColor.Instance.chosePenColor(choseColorNum);
+        }
+
+
+        //ゲームスタート時、枠外に左右5体のくまを生成
         for (int i = 0; i < 2; i++)
         {
-            //1週目は右側に下方から作成（x軸少しずつずらし、ばらけるように）
+            //1週目は右側に下方から作成
             while (kumaPosition.y < 6)
             {
                 if (choseColorNum >= 6) //6以上は色設定ないため作成させない
@@ -40,13 +58,12 @@ public class KumaCreate : MonoBehaviour
                 }
 
                 GameObject kuma = Instantiate(kumaPrefab, kumaPosition, Quaternion.identity);
-
                 GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
 
                 if (LevelScript.choisedLevel == level.lower) //単色の場合
                 {
-                    kumaPenSprite.color = KumaColor.Instance.chosePenColor(oneColorNum);
+                    kumaPenSprite.color = KumaColor.Instance.chosePenColor((int)LevelScript.level1Color);
                 }
                 else //カラフルの場合
                 {
@@ -54,6 +71,7 @@ public class KumaCreate : MonoBehaviour
                     choseColorNum++;
                 }
 
+                //四方に散らばるように少しずつx/y軸を変える
                 kumaPosition.x = kumaPosition.x - 0.2f;
                 kumaPosition.y = kumaPosition.y + 2.5f;
             }
@@ -68,19 +86,20 @@ public class KumaCreate : MonoBehaviour
 
     void Update()
     {
+        //カウント開始
         timeElapsed += Time.deltaTime;
 
+        //5秒ごとに新しいくまを生成
         if (timeElapsed >= 5.0f)
         {
-            if (kumaCheck()) //30匹以上いる場合は生成しない
+            if (kumaCheck()) //30匹以上いる場合は新しく生成しない
             {
-
                 //現れる場所をランダムに（毎回違うゲームになるように）
                 System.Random yRandom = new System.Random();
                 float yPosition = (float)yRandom.Next(-5, 5);
 
+                //7週カウント数を、色選択数用に渡す
                 int choseColorNum = colorNumCount;
-
 
                 //左右順番に生成
                 if (leftRight) { kumaPosition = new Vector2(5.0f, yPosition); }
@@ -95,15 +114,15 @@ public class KumaCreate : MonoBehaviour
                     //くま色設定
                     GameObject kumaPen = kuma.transform.Find("kumapen").gameObject;
                     SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
-                    kumaPenSprite.color = KumaColor.Instance.chosePenColor(oneColorNum);
+                    kumaPenSprite.color = KumaColor.Instance.chosePenColor((int)LevelScript.level1Color);
                 }
                 else //カラフルの場合
                 {
                     //ランダム時（6,7の場合）の色決定
                     if (colorNumCount >= 6)
                     {
-                        choseColorNum = yRandom.Next(startColorNumCount, 5);
-                        Debug.Log("ランダム値→" + choseColorNum);
+                        choseColorNum = yRandom.Next(startColorNumCount, 5); //レベルによってランダム値は変動
+                        Debug.Log("ランダム値 → " + choseColorNum);
                     }
 
                     //くま色設定
@@ -125,10 +144,10 @@ public class KumaCreate : MonoBehaviour
         }
     }
 
-    bool kumaCheck()
+    bool kumaCheck() //画面上のくま数をチェック
     {
         kumaObjects = GameObject.FindGameObjectsWithTag("kuma");
-        Debug.Log("くまの量" + kumaObjects.Length);
+        Debug.Log("くまの量 → " + kumaObjects.Length);
         if (kumaObjects.Length >= 30)
         {
             return false;
