@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PointClass : MonoBehaviour
 {
-    //塗られる対象（ohanaの花びらとか）の情報を格納するクラス
-    //ゲームが始まる時にScoreScriptから格納され、コントロールされる
+    //色ぬられる対象（ohanaの花びらなど）にアタッチし、情報を格納するクラス
+    //ゲーム開始時にScoreScriptに格納され、コントロールされる
 
-    //ゲーム色ぬり上の色の入るオブジェクトにアタッチする
-
+    [HideInInspector]
     public Color nowColor; //現在の色
 
     public GameObject collectPointParent; //正解のオブジェクトを束ねている親オブジェクト
     GameObject collectPoint; //正解の色が入っているオブジェクト
-    [SerializeField]
-    Color collectColor; //正解の色
+
+    [HideInInspector]
+    public Color collectColor; //正解の色
 
     public int myNum; //問題番号（オブジェクトの順番）
 

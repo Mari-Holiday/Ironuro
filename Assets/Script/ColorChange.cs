@@ -8,11 +8,14 @@ public class ColorChange : MonoBehaviour
     GameObject tapKuma;
     GameObject tapOhana;
 
+    private Vector2 kumahana;
     GameObject particlePrefab;
+    GameObject wrongParticlePrefab;
 
     void Start()
     {
         particlePrefab = (GameObject)Resources.Load("Particle");
+        wrongParticlePrefab = (GameObject)Resources.Load("WrongParticle");
     }
 
     void Update()
@@ -42,8 +45,6 @@ public class ColorChange : MonoBehaviour
 
     void changeOhanaColor()
     {
-        Vector2 kumahana;
-
         //ペン先からRayを飛ばすため、くま自体のPositionから計算してペン先のPosisionを取得
         if (tapKuma.GetComponent<KumaMoveScript>().getKumaDirection())
         { //右向き
@@ -73,14 +74,29 @@ public class ColorChange : MonoBehaviour
                 SpriteRenderer kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
                 tapOhana.GetComponent<SpriteRenderer>().color = kumaPenSprite.color;
 
-                //パーティクル生成
-                GameObject particle = Instantiate(particlePrefab, kumahana, Quaternion.identity);
+                //パーティクル作成
+                GameObject particle;
+                if (tapOhana.GetComponent<PointClass>().collectColor
+                    == kumaPenSprite.color) //正解だった場合（sameColorでは間に合わないため直判定）
+                {
+                    particle = Instantiate(particlePrefab, kumahana, Quaternion.identity);
+                }
+                else //不正解だった場合 
+                {
+                    particle = Instantiate(wrongParticlePrefab, kumahana, Quaternion.identity);
+                }
                 particle.GetComponent<ParticleSystem>().Emit(1);
+                Destroy(particle, (float)particle.GetComponent<ParticleSystem>().main.duration);
 
                 //現在の色情報を色ぬりオブジェクトに保持
                 tapOhana.GetComponent<PointClass>().nowColor = kumaPenSprite.color;
             }
         }
+    }
+
+    public Vector2 getKumahana()
+    {
+        return kumahana;
     }
 
 }
