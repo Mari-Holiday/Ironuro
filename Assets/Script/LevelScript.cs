@@ -31,16 +31,15 @@ public class LevelScript : MonoBehaviour
 
     void OnDisable()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Length; i++) //終了時イベントの削除
         {
             buttons[i].onClick.RemoveAllListeners();
-            Debug.Log(buttons[i].name + "けす");
         }
     }
 
     public void checkLevel(level choiseLevel)
     {
-        Debug.Log("よばれたわ" + choiseLevel);
+        Debug.Log("level = " + choiseLevel);
 
         if (choiseLevel == level.lower) //単色レベル
         {
@@ -66,10 +65,16 @@ public class LevelScript : MonoBehaviour
 
         choisedLevel = choiseLevel;
 
+        StartCoroutine(screenChange()); //1秒（アニメーション再生）後にIntoroduce画面へ遷移
+    }
+
+    private IEnumerator screenChange()
+    {
+        yield return new WaitForSeconds(1.0f); //コルーチンで1秒待機
         GameTimeControl.levelChoise = false;
     }
 
-    void ohanaColorSet()
+    void ohanaColorSet() //カラフル花のセットメソッド
     {
         ohanas[0].color = ohanas[2].color = ohanas[4].color = KumaColor.Instance.chosePenColor(3);
         ohanas[1].color = ohanas[3].color = ohanas[5].color = KumaColor.Instance.chosePenColor(2);
