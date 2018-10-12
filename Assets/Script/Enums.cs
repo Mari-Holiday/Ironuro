@@ -1,4 +1,7 @@
-﻿public enum kumaCOL
+﻿
+/* 列挙型宣言 */
+
+public enum kumaCOL
 {
     white = 0,
     black = 1,

@@ -6,6 +6,8 @@ using System;
 
 public class LevelScript : MonoBehaviour
 {
+    /* レベル選択画面にアタッチ */
+
     //今回のゲームレベルを保持
     public static level choisedLevel;
 
@@ -51,14 +53,15 @@ public class LevelScript : MonoBehaviour
             foreach (SpriteRenderer ohana in ohanas)
             {
                 ohana.color = KumaColor.Instance.chosePenColor((int)level1Color);
-                Debug.Log(level1Color);
             }
         }
+
         if (choiseLevel == level.middle) //色ありのみレベル
         {
             KumaCreate.startColorNumCount = 2;
             ohanaColorSet();
         }
+
         if (choiseLevel == level.upper) //邪魔あり全色レベル
         {
             KumaCreate.startColorNumCount = 0;
