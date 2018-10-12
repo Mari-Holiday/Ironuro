@@ -43,10 +43,6 @@ public class KumaMoveScript : MonoBehaviour
         float x = this.transform.position.x - prevPos.x;
         float y = this.transform.position.y - prevPos.y;
 
-        //早くなりすぎないために強さの制御
-        if (x > 0.18f) { x = 0.18f; }
-        if (y > 0.18f) { y = 0.18f; }
-
         force = new Vector2(x, y).normalized;
 
         if (x < 0) { kumaDirection = false; } //x0が中央、そのため右向き
