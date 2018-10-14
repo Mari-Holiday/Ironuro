@@ -7822,7 +7822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b53b8f37e89342f2baf79a4fc0483d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1Color: 4
   ohanas:
   - {fileID: 1158483667}
   - {fileID: 2045431056}

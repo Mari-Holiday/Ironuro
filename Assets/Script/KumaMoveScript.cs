@@ -26,12 +26,16 @@ public class KumaMoveScript : MonoBehaviour
         //くまの回転を阻止、動く方向によって左右の向きのみ変動
         if (kumaDirection) { gameObject.transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f); } //左向き
         else { gameObject.transform.rotation = new Quaternion(0.0f, 180.0f, 0.0f, 0.0f); } //右向き
+
+        speedControl(); //常にスピードの確認
     }
 
     void FixedUpdate()
     {
         //力を与え続ける
         rb.AddForce(force);
+
+        speedControl();　//力を与えるごとにスピードの確認
 
         //現在のPosisionを保持
         prevPos = gameObject.transform.position;
@@ -52,6 +56,17 @@ public class KumaMoveScript : MonoBehaviour
     public bool getKumaDirection()
     {
         return kumaDirection;
+    }
+
+    private void speedControl()
+    {
+        //スピードの制御
+        if (rb.velocity.magnitude > 8)
+        {
+            Debug.Log("seigyo " + rb.velocity.magnitude);
+            rb.velocity = rb.velocity * (8f / rb.velocity.magnitude);
+            Debug.Log("seigyogo" + rb.velocity.magnitude);
+        }
     }
 
 }
