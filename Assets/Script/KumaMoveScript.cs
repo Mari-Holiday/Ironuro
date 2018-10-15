@@ -63,9 +63,7 @@ public class KumaMoveScript : MonoBehaviour
         //スピードの制御
         if (rb.velocity.magnitude > 8)
         {
-            Debug.Log("seigyo " + rb.velocity.magnitude);
             rb.velocity = rb.velocity * (8f / rb.velocity.magnitude);
-            Debug.Log("seigyogo" + rb.velocity.magnitude);
         }
     }
 

@@ -13,6 +13,7 @@ public class KumaScript : MonoBehaviour
     GameObject kuma;
     GameObject kumaPen;
     SpriteRenderer kumaPenSprite;
+    GameObject kumaFace;
 
     //自爆8秒カウント用
     float timeElapsed;
@@ -25,9 +26,10 @@ public class KumaScript : MonoBehaviour
     {
         kuma = gameObject;
 
-        //くまの子要素となるクマペンを取得、保持
+        //くまの子要素となるクマペンとくま顔を取得、保持
         kumaPen = kuma.transform.Find("kumapen").gameObject;
         kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
+        kumaFace = kuma.transform.Find("kumaTouched").gameObject;
     }
 
     void Update()
@@ -58,6 +60,19 @@ public class KumaScript : MonoBehaviour
         }
 
     }
+
+    public void changeFaceTouched()
+    {
+        kumaFace.SetActive(true);
+        Debug.Log("yobareta");
+    }
+
+    public void changeFaceNotTouched()
+    {
+        kumaFace.SetActive(false);
+    }
+
+
 
 
 
