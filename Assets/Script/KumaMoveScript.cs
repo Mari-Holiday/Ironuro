@@ -21,6 +21,7 @@ public class KumaMoveScript : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
 
+        //レベルごとにくま最高スピードを調整
         switch (LevelScript.choisedLevel)
         {
             case level.lower:
