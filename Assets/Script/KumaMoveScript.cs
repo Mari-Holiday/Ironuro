@@ -10,6 +10,7 @@ public class KumaMoveScript : MonoBehaviour
     //動きの制御用
     Vector2 force = new Vector2(0.0f, 2.0f);
     Rigidbody2D rb;
+    float speedLevel = 6.0f;
 
     //進行方向を保持
     Vector2 prevPos;
@@ -19,6 +20,19 @@ public class KumaMoveScript : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        switch (LevelScript.choisedLevel)
+        {
+            case level.lower:
+                speedLevel = 6.0f;
+                break;
+            case level.middle:
+                speedLevel = 7.0f;
+                break;
+            case level.upper:
+                speedLevel = 8.0f;
+                break;
+        }
     }
 
     void Update()
@@ -61,9 +75,9 @@ public class KumaMoveScript : MonoBehaviour
     private void speedControl()
     {
         //スピードの制御
-        if (rb.velocity.magnitude > 8)
+        if (rb.velocity.magnitude > speedLevel)
         {
-            rb.velocity = rb.velocity * (8f / rb.velocity.magnitude);
+            rb.velocity = rb.velocity * (speedLevel / rb.velocity.magnitude);
         }
     }
 
