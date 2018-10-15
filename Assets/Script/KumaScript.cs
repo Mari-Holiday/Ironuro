@@ -30,6 +30,8 @@ public class KumaScript : MonoBehaviour
         kumaPen = kuma.transform.Find("kumapen").gameObject;
         kumaPenSprite = kumaPen.GetComponentInChildren<SpriteRenderer>();
         kumaFace = kuma.transform.Find("kumaTouched").gameObject;
+
+        kumaFace.SetActive(false);
     }
 
     void Update()
@@ -61,12 +63,11 @@ public class KumaScript : MonoBehaviour
 
     }
 
+    //くまオブジェクト顔変化用イベント呼び出し用のメソッド
     public void changeFaceTouched()
     {
         kumaFace.SetActive(true);
-        Debug.Log("yobareta");
     }
-
     public void changeFaceNotTouched()
     {
         kumaFace.SetActive(false);
