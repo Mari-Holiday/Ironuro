@@ -14,6 +14,9 @@ public class TitleScript : MonoBehaviour
 
     void Start()
     {
+        //PC用画面成形
+        Screen.SetResolution(750, 1334, false, 60);
+
         //通常の回転方向を保持
         rotateNormal = gameObject.GetComponent<Transform>().rotation;
     }

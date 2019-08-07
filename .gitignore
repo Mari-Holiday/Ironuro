@@ -1,6 +1,8 @@
 **/Library/
 **/Temp/
 **/obj/
+**/Build/
+**/Build2/
 
 **/.vscode/
 **/.vs
